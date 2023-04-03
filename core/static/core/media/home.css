@@ -1,0 +1,9 @@
+.blogFooter{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #0a4275;
+    color: white;
+    text-align: center;
+}
