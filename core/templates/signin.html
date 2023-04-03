@@ -13,9 +13,10 @@
 <body>
 
   <form action="" method="post" class="text-center p-lg-5 ">
+    {% csrf_token %}
     <div class="form-group">
 
-      {% csrf_token %}
+      
 
       {% if form.non_field_errors %}
       {% for error in form.non_field_errors %}

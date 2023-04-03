@@ -62,10 +62,13 @@ def Profile(request):
         if request.method == 'POST':
             title = request.POST['title']
             discription = request.POST['discription']
-            author = request.POST['author']
+            author = request.user.username
+            print(author)
             image = request.POST['image']
             if Blog_Model.objects.filter(title=title).exists():
                 messages.infor("class and name already exist")
             else:
                 Blog_Model.objects.create(title=title, discription=discription, author=author, image=image)
         return render(request, "profile.html")
+    else:
+        return HttpResponseRedirect('/SignIn/')
