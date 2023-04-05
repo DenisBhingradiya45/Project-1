@@ -1,39 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=0, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-    <title>Document</title>
+	<title>User Profile Page</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+	<link rel="stylesheet" href="{% static 'core/media/profile.css' %}">
 </head>
-
 <body>
-    <form action="{% url 'Profile' %}" method="post">
-        {%csrf_token%}
-        <div class="container p-3">
-
-            <label for="" class="">Title : </label>
-            <input type="text" placeholder="title" name="title"><br><br>
-
-            <label for="" class="">Description : </label>
-            <textarea rows="10" cols="50" class="" name="discription"> </textarea><br><br>
-<!-- 
-            <label for="" class="">Author : </label>
-            <input type="text" placeholder="Author" value={{user.get_username}} name="author"><br><br> -->
-
-
-            <input type="file" src="" alt="" name="image"><br><br>
-
-            <button type="submit" class="btn btn-danger">Cancel</button>
-            <button type="submit" class="btn btn-success">Submit</button>
-        </div>
-    </form>
-
-
-
+	<header>
+		<h1>User Profile</h1>
+	</header>
+	<main>
+		<div class="profile-img">
+			<img src="profile-pic.jpg" alt="Profile Picture">
+		</div>
+		<div class="profile-info">
+			<h2>John Doe</h2>
+			<p>Age: 25</p>
+			<p>Occupation: Software Developer</p>
+			<p>Location: New York City</p>
+			<p>Email: john.doe@example.com</p>
+			<p>Phone: +1 (555) 123-4567</p>
+			<p>Website: <a href="https://johndoe.com">https://johndoe.com</a></p>
+			<p>Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod convallis ligula, eu dapibus augue aliquam ac. Nulla quis augue non lacus dignissim bibendum. Nam vitae neque rhoncus, vestibulum purus ac, auctor tellus. Etiam laoreet ex quis dolor efficitur ullamcorper.</p>
+		</div>
+	</main>
+	<footer>
+		<p>&copy; 2023 John Doe</p>
+	</footer>
 </body>
-
 </html>

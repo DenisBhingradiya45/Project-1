@@ -11,6 +11,10 @@ from django.contrib import messages
 
 # Create your views here.
 
+def home(request):
+    blog = Blog_Model.objects.all()
+    return render(request, "home.html", {'blog':blog})
+
 def SignUp(request):
     if not request.user.is_authenticated:
         if request.method == "POST":
@@ -35,6 +39,8 @@ def SignIn(request):
                 if user is not None:
                     login(request, user)
                     return HttpResponseRedirect('/home/')
+                else:
+                    messages.info(request, 'Try again! username or password is incorrect')
         else:
             fm = AuthenticationForm()
         return render(request, "signin.html", {"form":fm})
@@ -43,32 +49,32 @@ def SignIn(request):
 
 def LogOut(request):
     logout(request)
-    return HttpResponseRedirect('/SignIn/')
+    return HttpResponseRedirect('/home/')
 
-def home(request):
+def profile(request):
+    pr = User.objects.all()
+    return render(request, 'profile.html', {'pr':pr})
+
+def AddBlog(request):
     if request.user.is_authenticated:
-        return render(request, "home.html")
+        if request.method == 'POST':
+            title = request.POST['title']
+            title = request.POST['title']
+            discription = request.POST['discription']
+            author = request.user.username
+            image = request.FILES['upload']
+            if Blog_Model.objects.filter(title=title).exists():
+                messages.error(request, "aaaaaaaaaaaaaaa")
+            else:
+                Blog_Model.objects.create(title=title, discription=discription, author=author, image=image)
+
+        return render(request, "AddBlog.html")
     else:
         return HttpResponseRedirect('/SignIn/')
+    
+def BlogDetails(request):
+    return render(request, "blog_detail.html")
 
 def about_us(request):
     return render(request, "about_us.html")
 
-def BlogDetails(request):
-    return render(request, "blog_detail.html")
-
-def Profile(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            title = request.POST['title']
-            discription = request.POST['discription']
-            author = request.user.username
-            print(author)
-            image = request.POST['image']
-            if Blog_Model.objects.filter(title=title).exists():
-                messages.infor("class and name already exist")
-            else:
-                Blog_Model.objects.create(title=title, discription=discription, author=author, image=image)
-        return render(request, "profile.html")
-    else:
-        return HttpResponseRedirect('/SignIn/')

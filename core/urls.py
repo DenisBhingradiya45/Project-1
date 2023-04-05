@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import *
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -10,8 +11,14 @@ urlpatterns = [
     path('home/', home, name="home"),
     path('about/', about_us, name="about_us"),
     path('BlogDetails/', BlogDetails, name="BlogDetails"),
-    path('Profile/', Profile, name="Profile"),
+    path('AddBlog/', AddBlog, name="AddBlog"),
+    path('profile/', profile, name="profile"),
 
 ]
 
-urlpatterns += staticfiles_urlpatterns()
+urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+print("",static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
+print(static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))

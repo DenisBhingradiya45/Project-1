@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Blog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+</head>
+
+<body>
+    
+    <form action="{% url 'AddBlog' %}" enctype="multipart/form-data" method="post">
+        {%csrf_token%}
+        <div class="container p-3">
+
+            <label for="" class="">Title : </label>
+            <input type="text" class="" placeholder="title" name="title" required><br><br>
+
+            <label for="" class="">Description : </label>
+            <textarea rows="10" cols="50" class="" name="discription" required> </textarea><br><br>
+            <!-- 
+            <label for="" class="">Author : </label>
+            <input type="text" placeholder="Author" value={{user.get_username}} name="author"><br><br> -->
+
+
+            <input type="file" name="upload" required ><br><br>
+
+            <!-- <button type="" class="btn btn-danger">Cancel</button> -->
+            <input type="submit" class="btn btn-success" value="Submit" onclick=""></input>
+        </div>
+
+    </form>
+
+</body>
+
+</html>

@@ -10,9 +10,11 @@ from django.contrib.auth.models import User
 class Blog_Model(models.Model):
     title = models.CharField(max_length=200, unique=True)
     discription = models.TextField()
-    author = models.ForeignKey(User, on_delete= models.CASCADE, related_name='author')
+    author = models.CharField(max_length=50)
     slug = models.SlugField(max_length=100,null=True, blank=True, unique=True)
-    image = models.ImageField(upload_to="Blog")
+    image = models.FileField(null=True, upload_to='blog-images')
+    # image = models.ImageField(null=True)
+    likes = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
