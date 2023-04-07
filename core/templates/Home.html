@@ -50,11 +50,11 @@
                             <ul class="dropdown-menu dropdown-menu-lg-end">
                                 {% if user.is_authenticated %}
                                 <li class="nav-item active">
-                                    <a class="nav-link dropdown-item" href="{% url 'profile' %}">Profile</a>
+                                    <a class="nav-link dropdown-item" href="{% url 'Profile' %}">Profile</a>
                                 </li>
                                 {% endif %}
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="{% url 'about_us' %}">about us <span class="sr-only"></span></a>
+                                    <a class="nav-link" href="{% url 'AboutUs' %}">about us <span class="sr-only"></span></a>
                                 </li>
                                 {% if user.is_authenticated %}
                                 <li class="nav-item active">
@@ -88,12 +88,14 @@
                             <img src="{{post.image.url}}" class="img-fluid rounded-start hw" alt="Blog-Image" />
                         </div>
                         <div class="col-md-8">
-                            <a href="{% url 'BlogDetails' %}">
+                            <a href="{% url 'BlogDetails' id=post.id %}">
                                 <div class="card-body">
 
                                     <h5 class="card-title">
                                         {{post.title}}
+                                        
                                     </h5>
+                                    {{post.id}}
 
                                     <!-- <p class="card-text">Steal the formula, upgrade your life</p> -->
                                     <p class="card-text">
@@ -132,9 +134,10 @@
 
     <script>
         function Home() {
-            window.location.replace("/home/");
+            window.location.replace("/Home/");
             console.log("Redirect To Home Page")
         }
+
     </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

@@ -3,4 +3,6 @@ from .models import *
  
 # Register your models here.
 
-admin.site.register(Blog_Model)
+@admin.register(Blog_Model)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ['id','title','author', 'image']

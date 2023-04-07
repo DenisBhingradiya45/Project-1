@@ -5,18 +5,21 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    path('Home/', Home, name="Home"),
     path('SignUp/', SignUp, name="SignUp"),
     path('SignIn/', SignIn, name="SignIn"),
     path('LogOut/', LogOut, name="LogOut"),
-    path('home/', home, name="home"),
-    path('about/', about_us, name="about_us"),
-    path('BlogDetails/', BlogDetails, name="BlogDetails"),
+    path('Profile/', Profile, name="Profile"),
+    path('AboutUs/', AboutUs, name="AboutUs"),
     path('AddBlog/', AddBlog, name="AddBlog"),
-    path('profile/', profile, name="profile"),
+    path('UpdateBlog/<int:pk>/', UpdateBlog, name="UpdateBlog"),
+    path('DeleteBlog/<int:id>/', DeleteBlog, name="DeleteBlog"),
+    path('BlogDetails/<int:id>/', BlogDetails, name="BlogDetails"),
+    path('UserBlog/', UserBlog, name='UserBlog')
 
-]
 
-urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
