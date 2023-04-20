@@ -13,7 +13,7 @@ urlpatterns = [
     path('AboutUs/', AboutUs, name="AboutUs"),
     path('AddBlog/', AddBlog, name="AddBlog"),
     path('UpdateBlog/<int:pk>/', UpdateBlog, name="UpdateBlog"),
-    path('DeleteBlog/<int:id>/', DeleteBlog, name="DeleteBlog"),
+    path('DeleteBlog/<int:pk>/', DeleteBlog, name="DeleteBlog"),
     path('BlogDetails/<int:id>/', BlogDetails, name="BlogDetails"),
     path('UserBlog/', UserBlog, name='UserBlog')
 

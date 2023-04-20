@@ -43,3 +43,10 @@ footer{
 	text-align: center;
 	background-color: #ddd;
 }
+
+button {
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+  }
