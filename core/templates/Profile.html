@@ -15,35 +15,25 @@
     <header>
         <h1>Welcome, <span> {{user.first_name}} {{user.last_name}}</span> </h1>
     </header>
-    <main class="d-flex justify-content-center">
-        <div class="profile-img">
-            <img src="#" alt="Profile Picture">
-        </div>
+    <main>
         <div class="profile-info">
             <h2>{{user.get_username}}</h2>
             <p>first_name: {{user.first_name}}</p>
             <p>last_name: {{user.last_name}}</p>
-            <p>Age: 25</p>
-            <p>Occupation: Software Developer</p>
-            <p>Location: New York City</p>
-            <p>{{user.email}}</p>
-            <p>Phone: +1 (555) 123-4567</p>
-            <p>Website: <a href="https://johndoe.com">https://johndoe.com</a></p>
-            <p>Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod convallis ligula, eu dapibus
-                augue aliquam ac. Nulla quis augue non lacus dignissim bibendum. Nam vitae neque rhoncus, vestibulum
-                purus ac, auctor tellus. Etiam laoreet ex quis dolor efficitur ullamcorper.</p>
+
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'UserBlog' %}"><button type="submit" style="width: 800px;"> Your Blog </button></a>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'AddBlog' %}"><button type="submit" style="width: 800px;"> Add Blog</button></a>
         </div>
     </main>
-    <div class="">
-        <a href="{% url 'UserBlog' %}">Your Blog</a>
-    </div>
-    <div class="">
-        <a href="{% url 'AddBlog' %}">Add Blog</a>
-    </div>
     <footer>
         <p>&copy; 2023 John Doe</p>
     </footer>
-    
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
