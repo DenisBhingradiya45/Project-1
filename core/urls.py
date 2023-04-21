@@ -14,8 +14,9 @@ urlpatterns = [
     path('AddBlog/', AddBlog, name="AddBlog"),
     path('UpdateBlog/<int:pk>/', UpdateBlog, name="UpdateBlog"),
     path('DeleteBlog/<int:pk>/', DeleteBlog, name="DeleteBlog"),
-    path('BlogDetails/<int:id>/', BlogDetails, name="BlogDetails"),
-    path('UserBlog/', UserBlog, name='UserBlog')
+    path('BlogDetails/<int:pk>/', BlogDetails, name="BlogDetails"),
+    path('UserBlog/', UserBlog, name='UserBlog'),
+    path('LikeBlog/<int:post_id>/', LikeBlog, name='LikeBlog'),
 
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -23,5 +24,5 @@ urlpatterns = [
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
-print("",static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
-print(static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))
+# print("",static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
+# print(static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))

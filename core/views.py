@@ -1,14 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate, logout
 from .models import *
 from django.contrib import messages
-from django.views.generic import ListView
-from django.template import loader
-
+from django.http import JsonResponse
+from django.urls import reverse
 
 
 
@@ -94,8 +93,6 @@ def UpdateBlog(request, pk):
     else:
         return HttpResponseRedirect('/SignIn/')
 
-
-
 def DeleteBlog(request, pk):
     if request.user.is_authenticated:
         fm = Blog_Model.objects.get(pk=pk)
@@ -105,8 +102,8 @@ def DeleteBlog(request, pk):
     else:
         return HttpResponseRedirect('/SignIn/')
 
-def BlogDetails(request, id):
-    item = Blog_Model.objects.get(id=id)
+def BlogDetails(request, pk):
+    item = Blog_Model.objects.get(pk=pk)
     return render(request,'Blog-Details.html', {'item': item})
 
 def UserBlog(request):
@@ -117,3 +114,14 @@ def UserBlog(request):
 
 def AboutUs(request):
     return render(request, "About-Us.html")
+
+def LikeBlog(request, post_id):
+    post = get_object_or_404(Blog_Model, id=post_id)
+    if request.user.is_authenticated:
+        if request.user in post.likes.all():
+            post.likes.remove(request.user)
+            post.save()
+        else:
+            post.likes.add(request.user)
+            post.save()
+    return redirect('/Home/')

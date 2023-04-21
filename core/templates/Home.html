@@ -24,13 +24,7 @@
             <div>
                 <img src="{% static 'core/media/4.png' %}" alt="Home" height="30px" onclick="Home()" />
             </div>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
 
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                    Search
-                </button>
-            </form>
 
             <div class="me-4">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -45,8 +39,8 @@
                                 data-bs-auto-close="true" aria-expanded="false">
                                 <img src="{% static 'core/media/6.png' %}" alt="" height="30px">
                             </button>
-                            
-                            
+
+
                             <ul class="dropdown-menu dropdown-menu-lg-end">
                                 {% if user.is_authenticated %}
                                 <li class="nav-item active">
@@ -54,7 +48,8 @@
                                 </li>
                                 {% endif %}
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="{% url 'AboutUs' %}">about us <span class="sr-only"></span></a>
+                                    <a class="nav-link" href="{% url 'AboutUs' %}">about us <span
+                                            class="sr-only"></span></a>
                                 </li>
                                 {% if user.is_authenticated %}
                                 <li class="nav-item active">
@@ -88,29 +83,32 @@
                             <img src="{{post.image.url}}" class="img-fluid rounded-start hw" alt="Blog-Image" />
                         </div>
                         <div class="col-md-8">
-                            <a href="{% url 'BlogDetails' id=post.id %}">
+                            <a href="{% url 'BlogDetails' pk=post.id %}">
                                 <div class="card-body">
 
                                     <h5 class="card-title">
                                         {{post.title}}
-                                        
                                     </h5>
-                                    {{post.id}}
-
-                                    <!-- <p class="card-text">Steal the formula, upgrade your life</p> -->
                                     <p class="card-text">
                                         <small class="text-muted dateText">Last updated {{post.updated_at.date}}</small>
                                     </p>
                                 </div>
                             </a>
                         </div>
-
                     </div>
+                    <a href="{% url 'LikeBlog' post.id %}">
+                        <button class="like-button">
+                            <span class="like-icon">&#x2665;</span>
+                            <span class="like-text">{{post.likes.count}}</span>
+                        </button>
+                    </a>
                 </div>
             </div>
-            {% endfor %}
+           {% endfor %}
         </div>
     </div>
+
+
 
 
 
@@ -131,6 +129,37 @@
 
         </p>
     </div>
+
+    <script>
+        function handleLikeClick(postId) {
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            fetch(`/post/${postId}/like/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: '',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const countEl = document.querySelector(`#post-${postId}-count`);
+                    const count = data.count;
+                    const liked = data.liked;
+                    countEl.textContent = count;
+                    const likeBtn = document.querySelector(`#post-${postId}-like-btn`);
+                    if (liked) {
+                        likeBtn.classList.add('btn-primary');
+                        likeBtn.classList.remove('btn-secondary');
+                    } else {
+                        likeBtn.classList.add('btn-secondary');
+                        likeBtn.classList.remove('btn-primary');
+                    }
+                })
+                .catch(error => console.error(error));
+        }
+
+    </script>
 
     <script>
         function Home() {
